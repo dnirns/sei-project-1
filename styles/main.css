@@ -1,0 +1,7 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hotpink;
+  min-height: 100vh;
+}
