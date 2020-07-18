@@ -31,8 +31,8 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 500px;
-  width: 500px;
+  height: 800px;
+  width: 800px;
 }
 
 .game-grid div {
@@ -53,3 +53,16 @@ header {
 button {
   margin: 20px;
 }
+
+/* .press-enter-start {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} */

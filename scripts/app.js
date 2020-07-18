@@ -35,9 +35,15 @@ function init() {
 
   //* START GAME
 
-  function startGame() {
+  function startClick() {
     createPlayer()
     createEnemy()
+  }
+  function startEnter(e) {
+    if (e.keyCode === 13) {
+      createPlayer()
+      createEnemy()
+    }
   }
 
 
@@ -50,35 +56,31 @@ function init() {
   }
   
   //MOVE PLAYER - left key 37 - right key 39
-  function movePlayer(e){
-    
+  //STOPPED PLAYER MOVEMENT PAST LIMITS BUT NEED TO FIND WAY TO NOT HARD CODE CELLS...
+  function movePlayer(e){   
+  
     const playerMoveLeft = playerPosition - 1
     const playerMoveRight = playerPosition + 1
-    if (e.keyCode === 37) {
+    if (e.keyCode === 37 && playerPosition > 380) {
       removePlayer()
       playerPosition = playerMoveLeft
       createPlayer()
-    } else if (e.keyCode === 39) {
+    } else if (e.keyCode === 39 && playerPosition < 399) {
       removePlayer()
       playerPosition = playerMoveRight
       createPlayer()
     } else {
       return false
     }
+    
   } 
   
 
   //EVENTS
   resetButton.addEventListener('click', reset)
-  startButton.addEventListener('click', startGame)
+  startButton.addEventListener('click', startClick)
+  document.addEventListener('keyup', startEnter)
   document.addEventListener('keydown', movePlayer)
-
-
-  //PRINT PRESSED KEYCODE IN CONSOLE:
-  // function printKey(e) {
-  //   console.log(e.keyCode)
-  // }
-  // document.addEventListener('keyup', printKey)
 
 
   //MAKE GRID
@@ -95,10 +97,19 @@ function init() {
     }
   
   }
-  //make grid function on page load
+  //MAKE GRID ON LOAD
   makeGrid()
-  // createPlayer()
-  // movePlayer()
+
+
+  //PRINT PRESSED KEYCODE IN CONSOLE:
+  // function printKey(e) {
+  //   console.log(e.keyCode)
+  // }
+  // document.addEventListener('keyup', printKey)
+
+
+
+
 
 }
 
