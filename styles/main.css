@@ -19,6 +19,7 @@ header {
 }
 
 .game-wrapper {
+  margin: 20px;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -51,7 +52,7 @@ header {
 }
 
 button {
-  margin: 20px;
+
 }
 
 /* .press-enter-start {

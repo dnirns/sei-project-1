@@ -46,14 +46,22 @@ function init() {
     }
   }
 
-
   //RESET - REMOVE PLAYER AND RESET POSITION FOR NEXT START
-  function reset() {  
+  function resetClick() {  
     removePlayer()
     playerPosition = 390
     removeEnemy()
     enemyPosition = 10
   }
+  function resetKey(e) {
+    if (e.keyCode === 82) {
+      removePlayer()
+      playerPosition = 390
+      removeEnemy()
+      enemyPosition = 10
+    }    
+  }
+
   
   //MOVE PLAYER - left key 37 - right key 39
   //STOPPED PLAYER MOVEMENT PAST LIMITS BUT NEED TO FIND WAY TO NOT HARD CODE CELLS...
@@ -76,11 +84,16 @@ function init() {
   } 
   
 
-  //EVENTS
-  resetButton.addEventListener('click', reset)
+  //*EVENTS
+  //CLICKS
+  resetButton.addEventListener('click', resetClick)
   startButton.addEventListener('click', startClick)
+
+  //KEYS
   document.addEventListener('keyup', startEnter)
   document.addEventListener('keydown', movePlayer)
+  document.addEventListener('keyup', resetKey)
+  
 
 
   //MAKE GRID
@@ -102,10 +115,10 @@ function init() {
 
 
   //PRINT PRESSED KEYCODE IN CONSOLE:
-  // function printKey(e) {
-  //   console.log(e.keyCode)
-  // }
-  // document.addEventListener('keyup', printKey)
+  function printKey(e) {
+    console.log(e.keyCode)
+  }
+  document.addEventListener('keyup', printKey)
 
 
 
