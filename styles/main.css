@@ -2,7 +2,14 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: c64;
+  src: url(assets/fonts/C64.ttf);
+}
+
 body {
+  font-family: c64;
+  font-size: 1.5em;
   color: white;
   background-color: black;
   padding: 50px;
@@ -14,9 +21,6 @@ body {
   justify-content: center; 
 }
 
-header {
-  
-}
 
 .game-wrapper {
   margin: 20px;
@@ -32,14 +36,14 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 800px;
-  width: 800px;
+  height: 600;
+  width: 600px;
 }
 
 .game-grid div {
   border: 1px dotted rgb(169, 164, 164);
-  height: 5%;
-  width: 5%;
+  height: 40px;
+  width: 40px;
 }
 
 
@@ -49,10 +53,6 @@ header {
 
 .enemy {
   background-color: lawngreen;
-}
-
-button {
-
 }
 
 /* .press-enter-start {
