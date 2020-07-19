@@ -1,19 +1,20 @@
+@font-face {
+  @font-face {
+    font-family: 'Ancient-Moder-Tales';
+    src: url(assets/fonts/AncientModernTales-a7Po.ttf);
+}
+}
+
 * {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: c64;
-  src: url(assets/fonts/C64.ttf);
-}
-
 body {
-  font-family: c64;
+  font-family: 'Ancient-Modern-Tales';
   font-size: 1.5em;
   color: white;
-  background-color: black;
-  padding: 50px;
-  margin: 0;
+  background-color: rgb(33, 33, 33);
+  margin: 20px;
   text-align: center;
   display: flex; 
   flex-direction: column; 
@@ -36,16 +37,18 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 600;
-  width: 600px;
+  height: 450px;
+  width: 450px;
 }
 
 .game-grid div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px dotted rgb(169, 164, 164);
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
-
 
 .player {
   background-color: mediumpurple;
@@ -55,15 +58,28 @@ body {
   background-color: lawngreen;
 }
 
-/* .press-enter-start {
-  animation: blink 1s linear infinite;
+button {
+  margin: 5px 30px;
+  font-family: 'Ancient-Modern-Tales';
+  padding: 10px;
+  font-size: 1.2em;
+  
+  
 }
 
+#start-button {
+  animation: blink 2s linear infinite;
+
+}
+/* 
 @keyframes blink {
   0% {
     opacity: 0;
   }
-  100% {
-    opacity: 1;
+  49% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 100;
   }
 } */
