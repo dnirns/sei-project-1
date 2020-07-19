@@ -6,7 +6,9 @@ function init() {
   const cells = []
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button') 
-  const moveEnemyButton = document.querySelector('#move-enemy')
+  // const moveEnemyButton = document.querySelector('#move-enemy')
+  const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7, 8]
+  let enemyPosition = 3
 
   //?EXECUTION
 
@@ -17,19 +19,19 @@ function init() {
   function createPlayer() {
     cells[playerPosition].classList.add('player')
   }
-  //ADD ENEMY
-  let enemyPosition = 7
+  //ADD ENEMIES
   function createEnemy() {
-    cells[enemyPosition].classList.add('enemy')
+    enemies.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy'))
   }
   //REMOVE PLAYER
   function removePlayer() {
     cells[playerPosition].classList.remove('player')
   }
-  //REMOVE ENEMY
-  function removeEnemy() {
+  //REMOVE ENEMIES
+  function removeAllEnemies() {
     cells[enemyPosition].classList.remove('enemy')
   }
+
 
 
 
@@ -52,15 +54,16 @@ function init() {
   function resetClick() {  
     removePlayer()
     playerPosition = 217
-    removeEnemy()
-    enemyPosition = 7
+    removeAllEnemies()
+    enemyPosition = 3
   }
+
   function resetKey(e) {
     if (e.keyCode === 82) {
       removePlayer()
       playerPosition = 217
-      removeEnemy()
-      enemyPosition = 7
+      removeAllEnemies()
+      enemyPosition = 3
     }    
   }
 
@@ -83,28 +86,22 @@ function init() {
     }
   } 
   
+
+  
   //ENEMY MOVEMENT
-  function moveEnemy() {  
-    setInterval(() => { 
-      removeEnemy()
+  function moveEnemy() {     
+    setInterval(() => {   
+      removeAllEnemies()  
       enemyPosition = enemyPosition + 1 
-      // if (enemyPosition < 19) {
-      //   enemyPosition = enemyPosition + 1       
-      // }
       createEnemy()
-    }, 1000)
+    }, 1000)  
   }
 
 
+  //SET BOUNDARIES FOR ENEMIES:
 
-
-
-
-
-
-
-
-
+  // const enemyLimitLeft = enemies[0] % width === 0
+  // const enemyLimitRight = enemies[enemies.length -1] % width === width -1
 
   
 
@@ -112,7 +109,7 @@ function init() {
   //CLICKS
   resetButton.addEventListener('click', resetClick)
   startButton.addEventListener('click', startClick)
-  moveEnemyButton.addEventListener('click', moveEnemy)
+  startButton.addEventListener('click', moveEnemy)
 
   //KEYS
   document.addEventListener('keyup', startEnter)
