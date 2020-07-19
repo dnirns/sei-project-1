@@ -1,11 +1,11 @@
+/* 
 @font-face {
-  @font-face {
-    font-family: 'Ancient-Moder-Tales';
-    src: url(assets/fonts/AncientModernTales-a7Po.ttf);
-}
-}
+  font-family: 'Ancient-Modern-Tales';
+  src: url('assets/fonts/AncientModernTales-a7Po.ttf');
 
-* {
+} */
+
+* {   
   box-sizing: border-box;
 }
 

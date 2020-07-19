@@ -1,21 +1,43 @@
 function init() {
 
-
   //*ELEMENTS
   const grid = document.querySelector('.game-grid')
-  const cells = []
+  
   const startButton = document.querySelector('#start-button')
-  const resetButton = document.querySelector('#reset-button') 
+  const resetButton = document.querySelector('#reset-button')
   // const moveEnemyButton = document.querySelector('#move-enemy')
+  
+  
+  
+  //MAIN GAME VARIABLES
+  const cells = []
   const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7, 8]
   let enemyPosition = 3
+  let playerPosition = 217
+
+
+
+  //GRID
+
+  const width = 15
+  const numberOfCells = width * width
+  function makeGrid() {
+    for (let i = 0; i < numberOfCells; i++) {
+      const cell = document.createElement('div')
+      cells.push(cell)
+      cell.innerHTML = '.'
+      grid.appendChild(cell)
+      // console.log('clicked me')
+    }
+  }
+
+
 
   //?EXECUTION
 
   //*PLAYER AND ENEMIES
-
   //ADD PLAYER (+ SET START POSITION)
-  let playerPosition = 217
+
   function createPlayer() {
     cells[playerPosition].classList.add('player')
   }
@@ -42,6 +64,7 @@ function init() {
     createEnemy()
     moveEnemy()
   }
+
   function startEnter(e) {
     if (e.keyCode === 13) {
       createPlayer()
@@ -52,13 +75,14 @@ function init() {
 
   //* RESET
   //BUTTON OR R KEY RESETS
-  function resetClick() {  
+  function resetClick() {
     clearInterval(enemyTimerId)
     removePlayer()
     playerPosition = 217
     removeAllEnemies()
     enemyPosition = 3
   }
+
   function resetKey(e) {
     if (e.keyCode === 82) {
       clearInterval(enemyTimerId)
@@ -66,7 +90,7 @@ function init() {
       playerPosition = 217
       removeAllEnemies()
       enemyPosition = 3
-    }    
+    }
   }
 
 
@@ -74,7 +98,7 @@ function init() {
 
   //MOVE PLAYER WITH KEYS
   //STOPPED PLAYER MOVEMENT PAST GRID LIMIT BUT NEED TO FIND WAY TO NOT HARD CODE CELLS...
-  function movePlayer(e){   
+  function movePlayer(e) {
     const playerMoveLeft = playerPosition - 1
     const playerMoveRight = playerPosition + 1
     if (e.keyCode === 37 && playerPosition % width !== 0) {
@@ -86,24 +110,29 @@ function init() {
       playerPosition = playerMoveRight
       createPlayer()
     }
-  } 
-  
+  }
+
 
   //ENEMY MOVEMENT
 
 
-  //BOUNDARIES:
+  //BOUNDARIES: 
 
-  // const enemyLimitLeft
-  // const enemyLimitLeft
+  const enemyLimitLeft = enemies[0] % width === 0
+  const enemyLimitRight = enemies[enemies.length - 1] % width === width - 1
+
+  // console.log(enemyLimitLeft)
+  // console.log;
+
 
   let enemyTimerId = null
-  function moveEnemy() {     
-    enemyTimerId = setInterval(() => {   
-      removeAllEnemies()  
-      enemyPosition = enemyPosition + 1 
+
+  function moveEnemy() {
+    enemyTimerId = setInterval(() => {
+      removeAllEnemies()
+      enemyPosition = enemyPosition + 1
       createEnemy()
-    }, 1000)  
+    }, 1000)
   }
 
 
@@ -112,7 +141,7 @@ function init() {
   // const enemyLimitLeft = enemies[0] % width === 0
   // const enemyLimitRight = enemies[enemies.length -1] % width === width -1
 
-  
+
 
   //*EVENTS
   //CLICKS
@@ -128,23 +157,14 @@ function init() {
 
 
 
-  //try to make 11 x 11 
 
-  // GRID
-  const width = 15
-  const numberOfCells = width * width
-  function makeGrid() {
-    for (let i = 0; i < numberOfCells; i++) {
-      const cell = document.createElement('div')
-      cells.push(cell)
-      cell.innerHTML = '.'
-      grid.appendChild(cell)
-      // console.log('clicked me')
-    }
-  }
-  //MAKE GRID ON LOAD
+
+  
   makeGrid()
-
+  createEnemy()
+  createPlayer()
+  
+  //try to make 11 x 11 
 
 
   //PRINT PRESSED KEYCODE IN CONSOLE:
