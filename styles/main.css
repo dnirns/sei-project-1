@@ -37,8 +37,8 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  height: 450px;
-  width: 450px;
+  height: 480px;
+  width: 480px;
 }
 
 .game-grid div {

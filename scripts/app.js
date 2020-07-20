@@ -10,15 +10,15 @@ function init() {
 
   //MAIN GAME VARIABLES
   const cells = []
-  const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7, 8]
-  let enemyPosition = 3
-  let playerPosition = 217
+  const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7]
+  let enemyPosition = 0
+  let playerPosition = 240
 
 
 
   //GRID
 
-  const width = 15
+  const width = 16
   const numberOfCells = width * width
 
   function makeGrid() {
@@ -61,7 +61,7 @@ function init() {
   //BUTTON OR ENTER KEY STARTS GAME
   function startClick() {
     createPlayer()
-    createEnemy()
+    createEnemy() 
     moveEnemy()
   }
 
@@ -76,11 +76,11 @@ function init() {
   //* RESET
   //BUTTON OR R KEY RESETS
   function resetClick() {
-    clearInterval(enemyTimerRight)
+    clearInterval(enemyTimerId)
     removePlayer()
     playerPosition = 217
     removeAllEnemies()
-    enemyPosition = 3
+    enemyPosition = 0
   }
 
   function resetKey(e) {
@@ -129,12 +129,13 @@ function init() {
     createEnemy()
   }
 
-
+  let enemyTimerId = null
   function moveEnemy() {
     let isMovingRight = true
-    let enemyTimerId = null
+    
     let numberOfMoves = 0
     enemyTimerId = setInterval(() => {
+
       if (isMovingRight) {
         moveRight()        
       } else {
@@ -143,12 +144,17 @@ function init() {
       // * Regardless of direction, we do the below 
       numberOfMoves++ // * then incease your number of moves
 
-      if (numberOfMoves === 3) { // If they have made three moves
+      if (numberOfMoves === 8) { // If they have made three moves   
+        removeAllEnemies()     
+        // enemyPosition = enemyPosition + width - 1
+        createEnemy() 
         numberOfMoves = 0 // * set this back to 0
         isMovingRight = !isMovingRight // * and flip a boolean value, is isMovingRight, your moving right, is false, going left
+        
       } 
-     
-    }, 1000)
+
+
+    }, 500)
   }
   //SET BOUNDARIES FOR ENEMIES:
 
@@ -175,7 +181,7 @@ function init() {
 
 
   makeGrid()
-  createEnemy()
+  // createEnemy()
   createPlayer()
 
   //try to make 11 x 11 
