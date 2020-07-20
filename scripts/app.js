@@ -75,7 +75,7 @@ function init() {
   //* RESET
   //BUTTON OR R KEY RESETS
   function resetClick() {
-    clearInterval(enemyTimerId)
+    clearInterval(enemyTimerRight)
     removePlayer()
     playerPosition = 217
     removeAllEnemies()
@@ -84,7 +84,7 @@ function init() {
 
   function resetKey(e) {
     if (e.keyCode === 82) {
-      clearInterval(enemyTimerId)
+      clearInterval(enemyTimerRight)
       removePlayer()
       playerPosition = 217
       removeAllEnemies()
@@ -94,7 +94,7 @@ function init() {
 
 
   //* MOVEMENT
-  
+
   //MOVE PLAYER WITH KEYS
   //STOPPED PLAYER MOVEMENT PAST GRID LIMIT BUT NEED TO FIND WAY TO NOT HARD CODE CELLS...
   function movePlayer(e) {
@@ -113,32 +113,50 @@ function init() {
 
 
   //ENEMY MOVEMENT
-
-
   //BOUNDARIES: 
 
-  const enemyLimitLeft = enemies[0] % width === 0
-  const enemyLimitRight = enemies[enemies.length - 1] % width === width - 1
 
-  // console.log(enemyLimitLeft)
-  // console.log;
+  function moveRight() {
+    removeAllEnemies()
+    enemyPosition = enemyPosition + 1
+    createEnemy()
+  }
+  function moveLeft() { 
+    removeAllEnemies()
+    enemyPosition = enemyPosition - 1
+    createEnemy()
+  }
+ 
 
-
-  let enemyTimerId = null
-
+  let enemyTimer = null
+  
   function moveEnemy() {
-    enemyTimerId = setInterval(() => {
-      removeAllEnemies()
-      enemyPosition = enemyPosition + 1
-      createEnemy()
+    
+    let numOfMoves = 0
+    
+    enemyTimer = setInterval(() => {
+      numOfMoves++
+      moveRight()
+      if (numOfMoves === 3) {
+        clearInterval(enemyTimer)
+      }  
     }, 1000)
   }
+  
+
+  function moveLeft() { 
+    removeAllEnemies()
+    enemyPosition = enemyPosition - 1
+    createEnemy()
+  }
+
+
 
 
   //SET BOUNDARIES FOR ENEMIES:
 
-  // const enemyLimitLeft = enemies[0] % width === 0
-  // const enemyLimitRight = enemies[enemies.length -1] % width === width -1
+  
+  
 
 
 
