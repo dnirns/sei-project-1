@@ -5,9 +5,9 @@ function init() {
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button')
   // const moveEnemyButton = document.querySelector('#move-enemy')
-  
-  
-  
+
+
+
   //MAIN GAME VARIABLES
   const cells = []
   const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7, 8]
@@ -20,6 +20,7 @@ function init() {
 
   const width = 15
   const numberOfCells = width * width
+
   function makeGrid() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
@@ -121,42 +122,38 @@ function init() {
     enemyPosition = enemyPosition + 1
     createEnemy()
   }
-  function moveLeft() { 
+
+  function moveLeft() {
     removeAllEnemies()
     enemyPosition = enemyPosition - 1
     createEnemy()
   }
- 
 
-  let enemyTimer = null
-  
+
   function moveEnemy() {
-    
-    let numOfMoves = 0
-    
-    enemyTimer = setInterval(() => {
-      numOfMoves++
-      moveRight()
-      if (numOfMoves === 3) {
-        clearInterval(enemyTimer)
-      }  
+    let isMovingRight = true
+    let enemyTimerId = null
+    let numberOfMoves = 0
+    enemyTimerId = setInterval(() => {
+      if (isMovingRight) {
+        moveRight()        
+      } else {
+        moveLeft()     
+      }
+      // * Regardless of direction, we do the below 
+      numberOfMoves++ // * then incease your number of moves
+
+      if (numberOfMoves === 3) { // If they have made three moves
+        numberOfMoves = 0 // * set this back to 0
+        isMovingRight = !isMovingRight // * and flip a boolean value, is isMovingRight, your moving right, is false, going left
+      } 
+     
     }, 1000)
   }
-  
-
-  function moveLeft() { 
-    removeAllEnemies()
-    enemyPosition = enemyPosition - 1
-    createEnemy()
-  }
-
-
-
-
   //SET BOUNDARIES FOR ENEMIES:
 
-  
-  
+
+
 
 
 
@@ -180,7 +177,7 @@ function init() {
   makeGrid()
   createEnemy()
   createPlayer()
-  
+
   //try to make 11 x 11 
 
 
