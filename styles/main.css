@@ -54,8 +54,21 @@ body {
   background-color: mediumpurple;
 }
 
-.enemy {
+.enemy-row-1 {
   background-color: lawngreen;
+}
+
+.enemy-row-2 {
+  background-color: rgb(235, 33, 205);
+}
+.enemy-row-3 {
+  background-color: rgb(0, 252, 185);
+}
+.enemy-row-4 {
+  background-color: rgb(26, 84, 134);
+}
+.enemy-row-5 {
+  background-color: rgb(240, 44, 44);
 }
 
 button {

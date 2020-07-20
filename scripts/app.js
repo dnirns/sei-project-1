@@ -10,7 +10,11 @@ function init() {
 
   //MAIN GAME VARIABLES
   const cells = []
-  const enemies = [0, 1, 2, 3, 2, 4, 5, 6, 7]
+  const enemiesRow1Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const enemiesRow2Array = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  const enemiesRow3Array = [32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+  const enemiesRow4Array = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+  const enemiesRow5Array = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
   let enemyPosition = 0
   let playerPosition = 240
 
@@ -42,33 +46,58 @@ function init() {
     cells[playerPosition].classList.add('player')
   }
   //ADD ENEMIES
-  function createEnemy() {
-    enemies.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy'))
+  function createEnemyRow1() {
+    enemiesRow1Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-1'))
+  }
+  function createEnemyRow2() {
+    enemiesRow2Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-2'))
+  }
+  function createEnemyRow3() {
+    enemiesRow3Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-3'))
+  }
+  function createEnemyRow4() {
+    enemiesRow4Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-4'))
+  }
+  function createEnemyRow5() {
+    enemiesRow5Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-5'))
   }
   //REMOVE PLAYER
   function removePlayer() {
     cells[playerPosition].classList.remove('player')
   }
   //REMOVE ENEMIES
-  function removeAllEnemies() {
-    enemies.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy'))
+  function removeEnemyRow1() {
+    enemiesRow1Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-1'))
   }
-
-
-
+  function removeAllEnemies() {
+    enemiesRow1Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-1'))
+    enemiesRow2Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-2'))
+    enemiesRow3Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-3'))
+    enemiesRow4Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-4'))
+    enemiesRow5Array.forEach(enemy => cells[enemyPosition + enemy].classList.remove('enemy-row-5'))
+  }
+ 
+  //ALL ENEMY ROWS COMBINED
+  function createAllEnemies() {
+    createEnemyRow1()
+    createEnemyRow2()
+    createEnemyRow3()
+    createEnemyRow4()
+    createEnemyRow5()
+  }
 
   //* START GAME
   //BUTTON OR ENTER KEY STARTS GAME
   function startClick() {
     createPlayer()
-    createEnemy() 
+    createAllEnemies()
     moveEnemy()
   }
 
   function startEnter(e) {
     if (e.keyCode === 13) {
       createPlayer()
-      createEnemy()
+      createAllEnemies()
       moveEnemy()
     }
   }
@@ -78,18 +107,18 @@ function init() {
   function resetClick() {
     clearInterval(enemyTimerId)
     removePlayer()
-    playerPosition = 217
+    playerPosition = 240
     removeAllEnemies()
     enemyPosition = 0
   }
 
   function resetKey(e) {
     if (e.keyCode === 82) {
-      clearInterval(enemyTimerRight)
+      clearInterval(enemyTimerId)
       removePlayer()
-      playerPosition = 217
+      playerPosition = 240
       removeAllEnemies()
-      enemyPosition = 3
+      enemyPosition = 0
     }
   }
 
@@ -120,19 +149,18 @@ function init() {
   function moveRight() {
     removeAllEnemies()
     enemyPosition = enemyPosition + 1
-    createEnemy()
+    createAllEnemies()
   }
 
   function moveLeft() {
     removeAllEnemies()
     enemyPosition = enemyPosition - 1
-    createEnemy()
+    createAllEnemies()
   }
 
   let enemyTimerId = null
   function moveEnemy() {
-    let isMovingRight = true
-    
+    let isMovingRight = true 
     let numberOfMoves = 0
     enemyTimerId = setInterval(() => {
 
@@ -144,17 +172,17 @@ function init() {
       // * Regardless of direction, we do the below 
       numberOfMoves++ // * then incease your number of moves
 
-      if (numberOfMoves === 8) { // If they have made three moves   
-        removeAllEnemies()     
-        // enemyPosition = enemyPosition + width - 1
-        createEnemy() 
+      if (numberOfMoves === 6) { // If they have made three moves   
+        removeEnemyRow1()     
+        // enemyPosition = enemyPosition + width + 1
+        createEnemyRow1() 
         numberOfMoves = 0 // * set this back to 0
         isMovingRight = !isMovingRight // * and flip a boolean value, is isMovingRight, your moving right, is false, going left
         
       } 
 
 
-    }, 500)
+    }, 1500)
   }
   //SET BOUNDARIES FOR ENEMIES:
 
@@ -181,7 +209,7 @@ function init() {
 
 
   makeGrid()
-  // createEnemy()
+  createAllEnemies()
   createPlayer()
 
   //try to make 11 x 11 
