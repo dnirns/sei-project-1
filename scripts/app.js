@@ -30,23 +30,23 @@ function init() {
   }
 
   function createEnemyRow1() {
-    enemiesRow1Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-1'))
+    enemiesRow1Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-1' , 'enemy'))
   }
 
   function createEnemyRow2() {
-    enemiesRow2Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-2'))
+    enemiesRow2Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-2' , 'enemy'))
   }
 
   function createEnemyRow3() {
-    enemiesRow3Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-3'))
+    enemiesRow3Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-3' , 'enemy'))
   }
 
   function createEnemyRow4() {
-    enemiesRow4Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-4'))
+    enemiesRow4Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-4' , 'enemy'))
   }
 
   function createEnemyRow5() {
-    enemiesRow5Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-5'))
+    enemiesRow5Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-5' , 'enemy'))
   }
   function createLaser() {
     cells[laserPosition].classList.add('laser')
@@ -204,20 +204,28 @@ function init() {
 
   function moveLaser() {   
     // const isMoving = true
-    // let numOfMoves = 0
+    clearInterval(laserTimerId)
+    
     laserPosition = playerPosition
     laserTimerId = setInterval(() => {
       // numOfMoves++     
-      if (cells[laserPosition].classList.contains('enemy-row-5')) {       
+      if (cells[laserPosition].classList.contains('enemy')) {       
         removeLaser() 
         clearInterval(laserTimerId)      
-        cells[laserPosition].classList.remove('enemy-row-5')                         
+        cells[laserPosition].classList.remove('enemy')                         
       } else {
         removeLaser()
         laserPosition = laserPosition - width
-        createLaser()        
+        createLaser()
+        if (cells[laserPosition].classList.contains('enemy')) {
+          removeLaser()
+          clearInterval(laserTimerId)
+          cells[laserPosition].classList.remove('enemy')
+        }
       } 
     }, 100)
+
+    
   }
 
   
