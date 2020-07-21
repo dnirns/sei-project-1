@@ -13,7 +13,16 @@ function init() {
     }
   }
 
-
+  //* GAME ARRAYS AND GLOBAL VARIABLES //
+  let cells = []
+  let enemiesRow1Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const enemiesRow2Array = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+  const enemiesRow3Array = [32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
+  const enemiesRow4Array = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+  let enemiesRow5Array = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
+  let enemyPosition = 0
+  let playerPosition = 240
+  let laserPosition = playerPosition
 
   //* DOM ELEMENTS //
   const grid = document.querySelector('.game-grid')
@@ -89,16 +98,7 @@ function init() {
 
 
 
-  //* GAME ARRAYS AND GLOBAL VARIABLES //
-  let cells = []
-  let enemiesRow1Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  const enemiesRow2Array = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-  const enemiesRow3Array = [32, 33, 34, 35, 36, 37, 38, 39, 40, 41]
-  const enemiesRow4Array = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
-  let enemiesRow5Array = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73]
-  let enemyPosition = 0
-  let playerPosition = 240
-  let laserPosition = playerPosition
+
 
 
 
@@ -164,6 +164,13 @@ function init() {
 
   //* ENEMY MOVEMENT
 
+
+
+  //? DEFINE TOP LIMIT
+
+  
+
+
   function moveRight() {
     removeAllEnemies()
     enemyPosition = enemyPosition + 1
@@ -199,50 +206,47 @@ function init() {
 
   //* PLAYER SHOOT
 
-  //PLAYER POSITION STARTING POINT
-  //LASER POSITION = PLAYERPOSITION - WIDTH
-  // function moveLazer() {
-  //   lazerPosition = playerPosition
-
-  // }
 
   let laserTimerId = null
 
   function moveLaser() {
     laserPosition = playerPosition
-    laserTimerId = setInterval(() => {
-      // laserPosition = laserPosition - width
-      if (cells[laserPosition].classList.contains('enemy')) {
-        removeLaser()
-        clearInterval(laserTimerId)
+    let laserMoves = 0
+
+
+    laserTimerId = setInterval(() => {  
+      // laserPosition = laserPosition - width??
+      if (cells[laserPosition].classList.contains('enemy') || laserPosition < width) {            
         cells[laserPosition].classList.remove('enemy')
+        removeLaser() 
+        clearInterval(laserTimerId)
       } else {
         removeLaser()
         laserPosition = laserPosition - width
         createLaser()
       }
-      if (enemiesRow1Array.includes(laserPosition)) {
-        enemiesRow1Array = enemiesRow1Array.filter(enemy => {
-          enemy !== laserPosition
-        })
+      laserMoves++
+      if (laserMoves === 15) {
+        removeLaser()
+        clearInterval()
       }
+      // if (enemiesRow1Array.includes(laserPosition)) {
+      //   enemiesRow1Array = enemiesRow1Array.filter(enemy => {
+      //     enemy !== laserPosition
+      //     console.log(laserPosition)
+      //   })
+      // }
+      // isLaserMoving = false
+
     }, 50)
-
-
   }
 
-
-  // moveLaser()
-
-
-  // console.log(cells[width])
-  // createLaser()
   //* DECLARE FUNCTIONS ON LOAD
 
   makeGrid()
   createAllEnemies()
   createPlayer()
-  // createLaser()
+
 
   // PRINT PRESSED KEYCODE IN CONSOLE:
   // function printKey(e) {
