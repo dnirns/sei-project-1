@@ -211,7 +211,7 @@ function init() {
 
   function moveLaser() {
     laserPosition = playerPosition
-    let laserMoves = 0
+  
 
 
     laserTimerId = setInterval(() => {  
@@ -225,18 +225,13 @@ function init() {
         laserPosition = laserPosition - width
         createLaser()
       }
-      laserMoves++
-      if (laserMoves === 15) {
-        removeLaser()
-        clearInterval()
+
+      if (enemiesRow1Array.includes(laserPosition)) {
+        enemiesRow1Array = enemiesRow1Array.filter(enemy => {
+          enemy !== laserPosition
+          console.log(laserPosition)
+        })
       }
-      // if (enemiesRow1Array.includes(laserPosition)) {
-      //   enemiesRow1Array = enemiesRow1Array.filter(enemy => {
-      //     enemy !== laserPosition
-      //     console.log(laserPosition)
-      //   })
-      // }
-      // isLaserMoving = false
 
     }, 50)
   }
