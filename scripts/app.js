@@ -20,7 +20,7 @@ function init() {
   let enemyPositions = enemiesRow1Array.concat(enemiesRow2Array).concat(enemiesRow3Array).concat(enemiesRow4Array).concat(enemiesRow5Array)
   let enemyDirection = true
   let movesSinceDirectionSwitch = 0
-  let maxMovesInDirection = 6
+  const maxMovesInDirection = 6
   let playerPosition = 240
   let laserPosition = playerPosition
   //* DOM ELEMENTS //
@@ -109,9 +109,8 @@ function init() {
       moveLaser()
     }
   }
+
   //* ENEMY MOVEMENT
-
-
   function removeAllEnemyClasses() {
     enemyPositions.forEach(enemy => cells[enemy].classList.remove('enemy'))
   }
@@ -130,12 +129,13 @@ function init() {
     enemyPositions = enemyPositions.map(enemy => enemy += width)
     createAllEnemies()
   }
+
   let enemyTimerId = null
   function moveEnemies() {
-    console.log('calling move enemy')
+    
     clearInterval(enemyTimerId)
     enemyTimerId = setInterval(() => {
-      console.log('starting enemy timer')
+      
       if (enemyDirection) {
         moveEnemiesRight()
       } else {
@@ -147,11 +147,18 @@ function init() {
         enemyDirection = !enemyDirection
         moveEnemiesDown()
       }
-      // console.log('enemies have moved: ', enemyPositions)
-    }, 500)
+      if (enemyPositions[enemyPositions.length - 1] === (width * width) - 6) {
+       
+        clearInterval(enemyTimerId)
+        console.log('GAME OVER')
+      }
+    }, 50)
+  }
+  console.log()
+  function addExplosion() {
+    cells[laserPosition].classList.add('explosion')
   }
 
-  
   //* PLAYER SHOOT
   function createLaser() {
     cells[laserPosition].classList.add('laser')
@@ -165,17 +172,17 @@ function init() {
     const laserMovingUp = true
     clearInterval(laserTimerId)
     laserTimerId = setInterval(() => {
-      console.log('moveLaserTimer Init')
+      console.log('timer running')
+     
       if (cells[laserPosition].classList.contains('enemy')) {
-        clearInterval(laserTimerId)
         console.log('collision')
-        cells[laserPosition].classList.remove('enemy')
+        clearInterval(laserTimerId)       
+        cells[laserPosition].classList.remove('enemy')       
         enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)
-        console.log('new enemyPosition', enemyPositions)
-        removeLaser()
-        clearInterval(laserTimerId)
-      } else if (laserPosition < width) {
-        console.log('end of map')
+        // console.log('new enemyPosition', enemyPositions)
+        removeLaser()             
+      // areEnemiesAlive()       
+      } else if (laserPosition < width) {     
         removeLaser()
         clearInterval(laserTimerId)
       } else if (laserMovingUp) {
@@ -183,16 +190,58 @@ function init() {
         laserPosition = laserPosition - width
         createLaser()
       }
-    }, 50)
+      if (Array.isArray(enemyPositions) && enemyPositions.length) {
+        console.log(enemyPositions.length + ' enemies still alive')
+      } else {
+        cells[laserPosition].classList.remove('enemy') 
+        enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)   
+        removeLaser()
+        removePlayer()
+        removeAllEnemies()
+        clearInterval(laserTimerId)
+        clearInterval(enemyTimerId)
+        alert('WINNER WINNER!')
+      }
+      
+      
+    }, 100)
+    
   }
+
+  //* SPRITES
+
+ 
+  //* GAME OVER
+  //?LOSE - RESET AND THROW MESSAGE
+  //? IF ENEMIES COLLIDE WITH PLAYER
+  //? IF ENEMY LASER COLLIDES WITH PLAYER
+  //?WIN:
+  //? NO ENEMIES LEFT - WINNER MESSAGE / SCREEN AND RESET
+
+  // function areEnemiesAlive() {
+  //   console.log(`there are ${enemyPositions.length} enemies left`)
+  //   //CHECK IF ENEMYPOSITIONS ARRAY IS EMPTY - IF IT IS, RETURN FALSE = GAME WON
+  //   if (Array.isArray(enemyPositions) && enemyPositions.length) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+  
+  
+
+
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
   createAllEnemies()
   createPlayer()
+
+  // cells[100].classList.add('explosion')
   // PRINT PRESSED KEYCODE IN CONSOLE:
   // function printKey(e) {
   //   console.log(e.keyCode)
   // }
   // document.addEventListener('keyup', printKey)
 }
+
 document.addEventListener('DOMContentLoaded', init)
