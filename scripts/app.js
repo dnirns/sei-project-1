@@ -133,15 +133,13 @@ function init() {
     createAllEnemies()
   }
 
-  const bottomLeftGridIndex = (width * width) - width + 1
-  
+
+  const bottomLeftGridIndex = (width * width) - width + 1  
 
   let enemyTimerId = null
-  function moveEnemies() {
-    
+  function moveEnemies() {   
     clearInterval(enemyTimerId)
     enemyTimerId = setInterval(() => {
-      
       if (enemyDirection) {
         moveEnemiesRight()
       } else {
@@ -153,23 +151,19 @@ function init() {
         enemyDirection = !enemyDirection
         moveEnemiesDown()
       }
-      // (enemyPositions[enemyPositions.length - 1] === (width * width) - 6)
-      
       if (cells[bottomLeftGridIndex].classList.contains('enemy')) {
         
-        console.log('GAME OVER')
+        console.log('enemies over boundries - game over')
         
         clearInterval(enemyTimerId)
-        // alert('GAME OVER')
-        // return gameOver()
+      }
+      if (cells[playerPosition].classList.contains('enemy')) {
+        console.log('player hit - game over')
+        clearInterval(enemyTimerId)
       }
     }, 50)
   }
-  // console.log(enemyPositions(enemiesRow1Array))
-  // function addExplosion() {
-  //   cells[laserPosition].classList.add('explosion')
-  // }
-  
+
   
   //* PLAYER SHOOT
   function createLaser() {
@@ -202,7 +196,7 @@ function init() {
         isLaserShooting = true        
         cells[laserPosition].classList.remove('enemy')       
         enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)
-        // console.log('new enemyPosition', enemyPositions)
+    
         removeLaser()             
         // areEnemiesAlive()       
       } else if (laserPosition < width) {     
@@ -228,7 +222,7 @@ function init() {
         
         alert('WINNER WINNER!')
       }     
-    }, 50)
+    }, 20)
     
   }
 
