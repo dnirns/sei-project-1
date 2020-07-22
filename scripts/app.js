@@ -6,7 +6,7 @@ function init() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      cell.innerHTML = i
+      // cell.innerHTML = i
       grid.appendChild(cell)
     }
   }
@@ -52,11 +52,11 @@ function init() {
     cells[playerPosition].classList.remove('player')
   }
   function removeAllEnemies() {
-    enemyPositions.forEach(enemy => cells[enemy].classList.remove('enemy'))
+    enemyPositions.forEach(enemy => cells[enemy].classList.remove('ghost-shriek'))
   }
   // CREATE ALL ENEMY ROWS COMBINED FUNCTION
   function createAllEnemies() {
-    enemyPositions.forEach(enemy => cells[enemy].classList.add('enemy'))
+    enemyPositions.forEach(enemy => cells[enemy].classList.add('ghost-shriek'))
   }
   //* DOM EVENTS //
   //CLICKS
@@ -115,7 +115,7 @@ function init() {
 
   //* ENEMY MOVEMENT
   function removeAllEnemyClasses() {
-    enemyPositions.forEach(enemy => cells[enemy].classList.remove('enemy'))
+    enemyPositions.forEach(enemy => cells[enemy].classList.remove('ghost-shriek'))
   }
   function moveEnemiesRight() {
     removeAllEnemyClasses()
@@ -151,13 +151,13 @@ function init() {
         enemyDirection = !enemyDirection
         moveEnemiesDown()
       }
-      if (cells[bottomLeftGridIndex].classList.contains('enemy')) {
+      if (cells[bottomLeftGridIndex].classList.contains('ghost-shriek')) {
       
         console.log('enemies over boundries - game over')
         
         clearInterval(enemyTimerId)
       }
-      if (cells[playerPosition].classList.contains('enemy')) {
+      if (cells[playerPosition].classList.contains('ghost-shriek')) {
         console.log('player hit - game over')
         clearInterval(enemyTimerId)
       }
@@ -202,10 +202,10 @@ function init() {
     
     laserTimerId = setInterval(() => {  
       
-      if (cells[laserPosition].classList.contains('enemy')) {
+      if (cells[laserPosition].classList.contains('ghost-shriek')) {
         clearInterval(laserTimerId)      
         isLaserShooting = true 
-        cells[laserPosition].classList.remove('enemy')
+        cells[laserPosition].classList.remove('ghost-shriek')
         removeLaser()  
                             
         addExplosion() 
@@ -223,12 +223,12 @@ function init() {
         removeLaser()
         laserPosition = laserPosition - width
         createLaser()
-       
+      
       }
       if (Array.isArray(enemyPositions) && enemyPositions.length) {
         console.log(enemyPositions.length + ' enemies still alive')
       } else {
-        cells[laserPosition].classList.remove('enemy') 
+        cells[laserPosition].classList.remove('ghost-shriek') 
         enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)   
         removeLaser()
         removePlayer()
@@ -260,6 +260,7 @@ function init() {
 
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
+
   createAllEnemies()
   createPlayer()
   
