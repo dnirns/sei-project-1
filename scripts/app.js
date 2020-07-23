@@ -246,35 +246,12 @@ function init() {
         music.currentTime = 0
         gameWonText.style.visibility = 'visible'    
         resetButton.style.visibility = 'visible'
-        // alert('WINNER WINNER!')
       }     
     }, 30)
-
-    
-
   }
-
-  //* SPRITES
-  
- 
-  //* GAME OVER
-
-
-  //?LOSE - RESET AND THROW MESSAGE
-  //? IF ENEMIES COLLIDE WITH PLAYER
-  //? IF ENEMY LASER COLLIDES WITH PLAYER
-  //?WIN:
-  //? NO ENEMIES LEFT - WINNER MESSAGE / SCREEN AND RESET
-
-
-
 
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
-  // 
-  // createAllEnemies()
-  // createPlayer()
-  
   
   // 
   // PRINT PRESSED KEYCODE IN CONSOLE:
