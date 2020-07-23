@@ -30,9 +30,11 @@ function init() {
   const grid = document.querySelector('.game-grid')
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button')
+  const resetButtonWIn = document.querySelector('#reset-button-win')
   const gameOverText = document.querySelector('.game-over')
   const gameWonText = document.querySelector('.game-won')
   const music = new Audio('./assets/audio/Feeble-Screams-from-Forests-unknown-8 bit.mp3')
+  const musicWin = new Audio('./assets/audio/8-Bit Trivium - Like Light To The Flies..mp3')
   const explosionAudio = new Audio('./assets/audio/explosion_big_44.wav')
   const enemyHitAudio = new Audio('./assets/audio/explosion_29.wav')
   const laserAudio = new Audio('./assets/audio/laser_014.mp3')
@@ -60,6 +62,7 @@ function init() {
   //* DOM EVENTS //
   //CLICKS
   resetButton.addEventListener('click', resetClick)
+  resetButtonWIn.addEventListener('click', resetClick)
   startButton.addEventListener('click', startClick)
   //KEYS
   // document.addEventListener('keyup', startEnter)
@@ -191,7 +194,7 @@ function init() {
         clearInterval(enemyTimerId)
       }
 
-    }, 500)
+    }, 5000)
   }
 
     
@@ -249,15 +252,17 @@ function init() {
         clearInterval(enemyTimerId)
         music.pause()
         music.currentTime = 0
+        musicWin.play()
         gameWrapper.style.visibility = 'hidden'
-        gameWonText.style.visibility = 'visible'    
-        resetButton.style.visibility = 'visible'
+        gameWonText.style.visibility = 'visible'
+        resetButtonWIn.style.visibility = 'visible'      
       }     
     }, 30)
   }
 
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
+    
   
   // 
   // PRINT PRESSED KEYCODE IN CONSOLE:

@@ -153,7 +153,7 @@ h1 {
 }
 
 
-#start-button, #reset-button:hover {
+#start-button, #reset-button, #reset-button-win:hover {
   cursor: pointer;
 }
 
@@ -167,12 +167,13 @@ h1 {
   animation: blink 2s linear infinite;
 }
 
-#reset-button {
+#reset-button, #reset-button-win {
   visibility: hidden;
   color: red;
   text-shadow: 2px 2px white;
   animation: blink 2s linear infinite;
 }
+
 
 @keyframes blink {
   0% {
