@@ -28,6 +28,7 @@ function init() {
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button')
 
+
  
 
   //* DOM EXECUTION //
@@ -162,7 +163,7 @@ function init() {
         clearInterval(enemyTimerId)
       }
 
-    }, 500)
+    }, 666)
   }
 
     
@@ -186,7 +187,7 @@ function init() {
   }
 
   function moveLaser() {
-    if (!isLaserShooting) {
+    if (!isLaserShooting) {       
       return
     }
     isLaserShooting = false
@@ -202,28 +203,32 @@ function init() {
     
     laserTimerId = setInterval(() => {  
       
+      
       if (cells[laserPosition].classList.contains('ghost-shriek')) {
-        clearInterval(laserTimerId)      
         isLaserShooting = true 
-        cells[laserPosition].classList.remove('ghost-shriek')
-        removeLaser()  
-                            
-        addExplosion() 
-        explosionTimeoutId = setTimeout(() => {
-          cells[laserPosition].classList.remove('explosion')
-        }, 600 )  
-        
+        clearInterval(laserTimerId)               
+        cells[laserPosition].classList.remove('ghost-shriek')    
         enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)
+        removeLaser()  
+        addExplosion()                    
+        explosionTimeoutId = setTimeout(() => {         
+          cells[laserPosition].classList.remove('explosion')
+            
+        }, 200 )  
+        
+        
   
       } else if (laserPosition < width) {            
-        clearInterval(laserTimerId)     
+                    
         removeLaser()     
         isLaserShooting = true
-      } else if (laserMovingUp) {        
+      } else if (laserMovingUp) {     
+             
         removeLaser()
         laserPosition = laserPosition - width
-        createLaser()
-      
+        createLaser()  
+        
+
       }
       if (Array.isArray(enemyPositions) && enemyPositions.length) {
         console.log(enemyPositions.length + ' enemies still alive')
@@ -237,7 +242,7 @@ function init() {
         clearInterval(enemyTimerId)
         alert('WINNER WINNER!')
       }     
-    }, 100)
+    }, 25)
 
     
 
@@ -260,7 +265,6 @@ function init() {
 
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
-
   createAllEnemies()
   createPlayer()
   
