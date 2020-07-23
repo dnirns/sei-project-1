@@ -1,4 +1,5 @@
 function init() {
+
   //* GENERATE GRID //
   const width = 16
   const numberOfCells = width * width
@@ -6,10 +7,10 @@ function init() {
     for (let i = 0; i < numberOfCells; i++) {
       const cell = document.createElement('div')
       cells.push(cell)
-      // cell.innerHTML = i
       grid.appendChild(cell)
     }
   }
+
   //* GAME ARRAYS AND GLOBAL VARIABLES //
   const cells = []
   const enemiesRow1Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -23,31 +24,25 @@ function init() {
   const maxMovesInDirection = 6
   let playerPosition = 240
   let laserPosition = playerPosition
+
   //* DOM ELEMENTS //
+  const gameWrapper = document.querySelector('.game-wrapper')
   const grid = document.querySelector('.game-grid')
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button')
+  const gameOverText = document.querySelector('.game-over')
   const music = new Audio('./assets/audio/Feeble-Screams-from-Forests-unknown-8 bit.mp3')
-  
-
+  const explosionAudio = new Audio('./assets/audio/explosion_big_44.wav')
+  const enemyHitAudio = new Audio('./assets/audio/explosion_29.wav')
+  const laserAudio = new Audio('./assets/audio/laser_014.mp3')
+  const enemyDeathAudio = new Audio('./assets/audio/ghost-death.mp3')
 
   //* DOM EXECUTION //
   //? CREATE PLAYER AND ENEMIES
   function createPlayer() {
     cells[playerPosition].classList.add('player')
   }
-  // function createEnemyRow2() {
-  //   enemiesRow2Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-2' , 'enemy'))
-  // }
-  // function createEnemyRow3() {
-  //   enemiesRow3Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-3' , 'enemy'))
-  // }
-  // function createEnemyRow4() {
-  //   enemiesRow4Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-4' , 'enemy'))
-  // }
-  // function createEnemyRow5() {
-  //   enemiesRow5Array.forEach(enemy => cells[enemyPosition + enemy].classList.add('enemy-row-5' , 'enemy'))
-  // }
+
   //? REMOVE PLAYER AND ENEMIES
   function removePlayer() {
     cells[playerPosition].classList.remove('player')
@@ -67,10 +62,14 @@ function init() {
   document.addEventListener('keyup', startEnter)
   document.addEventListener('keydown', movePlayer)
   document.addEventListener('keyup', resetKey)
+  
+  
   //* GAME FUNCTIONS //
   //? START GAME - BUTTON AND ENTER KEY
   function startClick() {
+    music.play()
     startButton.style.visibility = 'hidden'
+    gameWrapper.style.visibility = 'visible'
     createPlayer()
     createAllEnemies()
     moveEnemies()
@@ -79,6 +78,7 @@ function init() {
     if (e.keyCode === 13) {  
       music.play()
       startButton.style.visibility = 'hidden' 
+      gameWrapper.style.visibility = 'visible'
       createPlayer()
       createAllEnemies()
       moveEnemies()
@@ -93,6 +93,8 @@ function init() {
       location.reload() 
     }
   }
+
+
   //* MOVEMENT //
   //? MOVE PLAYER WITH KEYS
   function movePlayer(e) {
@@ -133,7 +135,6 @@ function init() {
 
 
   const bottomLeftGridIndex = (width * width) - width + 1  
-
   let enemyTimerId = null
   function moveEnemies() {   
     clearInterval(enemyTimerId)
@@ -152,45 +153,44 @@ function init() {
       if (cells[bottomLeftGridIndex].classList.contains('ghost-shriek')) {
         clearInterval(enemyTimerId)
         removePlayer()
-        cells[playerPosition].classList.add('explosion-no-loop')
+        explosionAudio.play()
+        
+        cells[playerPosition].classList.add('explosion-no-loop') 
         playerPosition = null
-        removeAllEnemies() 
-        console.log('player hit - game over')
+        removeAllEnemies()  
+        gameOverText.style.visibility = 'visible'   
         resetButton.style.visibility = 'visible'
         resetButton.style.animation = 'blink 2s linear infinite'   
         clearInterval(enemyTimerId)
-        console.log('enemies over boundries - game over')
       }
       if (cells[playerPosition].classList.contains('ghost-shriek')) {
         clearInterval(enemyTimerId)
         removePlayer()
+        explosionAudio.play()
         cells[playerPosition].classList.add('explosion-no-loop')
         playerPosition = null
-        removeAllEnemies() 
-        console.log('player hit - game over')
+        removeAllEnemies()
+        gameOverText.style.visibility = 'visible'    
         resetButton.style.visibility = 'visible'
         resetButton.style.animation = 'blink 2s linear infinite'   
         clearInterval(enemyTimerId)
       }
 
-    }, 800)
+    }, 500
+    )
   }
 
     
-  
   //* PLAYER SHOOT
   function createLaser() {
+    laserAudio.play()
     cells[laserPosition].classList.add('laser')
   }
   function removeLaser() {
     cells[laserPosition].classList.remove('laser')
   }
-
   let isLaserShooting = true
-
   let laserTimerId = null
-  
-
 
   function addExplosion() {
     cells[laserPosition].classList.add('explosion')
@@ -201,38 +201,29 @@ function init() {
       return
     }
     isLaserShooting = false
-
     laserPosition = playerPosition
-
     const laserMovingUp = true
-  
-    clearInterval(laserTimerId)
-    
+    clearInterval(laserTimerId)  
     laserTimerId = setInterval(() => {         
       if (cells[laserPosition].classList.contains('ghost-shriek')) {
         isLaserShooting = true 
-        clearInterval(laserTimerId)               
+        clearInterval(laserTimerId)                
         cells[laserPosition].classList.remove('ghost-shriek')    
         enemyPositions = enemyPositions.filter(enemy => enemy !== laserPosition)
         removeLaser()  
-        addExplosion()                    
+        addExplosion()  
+        enemyHitAudio.play()   
+        enemyDeathAudio.play()                 
         explosionTimeoutId = setTimeout(() => {         
-          cells[laserPosition].classList.remove('explosion')
-            
+          cells[laserPosition].classList.remove('explosion')          
         }, 200 )  
-        
-        
-  
-      } else if (laserPosition < width) {            
-                    
+      } else if (laserPosition < width) {                               
         removeLaser()     
         isLaserShooting = true
       } else if (laserMovingUp) {                
         removeLaser()
         laserPosition = laserPosition - width
         createLaser()  
-        
-
       }
       if (Array.isArray(enemyPositions) && enemyPositions.length) {
         console.log(enemyPositions.length + ' enemies still alive')
@@ -269,6 +260,7 @@ function init() {
 
   //* DECLARE FUNCTIONS ON LOAD
   makeGrid()
+  // 
   // createAllEnemies()
   // createPlayer()
   

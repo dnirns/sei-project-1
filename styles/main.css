@@ -1,7 +1,7 @@
-/* @font-face {
+@font-face {
   font-family: 'Ancient-Modern-Tales';
-  src: url('assets/fonts/AncientModernTales-a7Po.ttf');
-} */
+  src: url('../assets/fonts/AncientModernTales-a7Po.ttf');
+}
 
 * {
   box-sizing: border-box;
@@ -11,37 +11,45 @@ body {
   font-family: 'Ancient-Modern-Tales';
   font-size: 1.5em;
   color: white;
-  background-color: rgb(74, 73, 73, 43);
+  background-image: url('/assets/backgrounds/Space_Stars2.png');
+  background-color: black;
   margin: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  
+ 
+    
 }
 
+h1 {
+  font-size: 2.5em;
+}
 .wrapper {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 } 
 .game-wrapper {
+  visibility: hidden; 
   margin: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 10px;
   color: white;
-  padding: 10px;
-  background-image: url('../assets/sprites/space2_4-frames.gif');
+  padding: 5px;
+  background-color: rgba(254, 254, 254, 0.214);
   background-repeat: repeat;
   
 }
 
 .game-grid {
+  background-image: url('/assets/backgrounds/b9e3da6363497.560b11e9a84d8 (1).png');
+  background-size: cover;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -59,13 +67,11 @@ body {
 }
 
 .game-over {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  height: 480px;
-  width: 480px;
-  background-color: aquamarine;
+  visibility: hidden;
+  text-align: center;
+  margin: 5px 5px;
+  position: fixed;
+  font-size: 2em;
 }
 
 .player {
@@ -107,7 +113,7 @@ body {
 .ghost-shriek {
   height: 100%;
   width: 100%;
-  content: url('../assets/sprites/ghost-shriek-cropped.gif');
+  content: url('../assets/sprites/ghost-shriek-adjusted.gif');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -144,24 +150,16 @@ body {
 #start-button {
   text-align: center;
   margin: 5px 5px;
-  
-  width: 100%;
-  padding: 10px;
-  font-size: 1.5em;
+  position: fixed;
+  font-size: 2.5em;
   color: rgb(249, 47, 47);  
   animation: blink 2s linear infinite;
 }
 
 #reset-button {
-  text-align: center;
-  margin: 5px 5px;
-  font-family: 'Ancient-Modern-Tales';
-  width: 100%;
-  padding: 10px;
-  font-size: 1.5em;
-  color: rgb(249, 47, 47); 
-  visibility: hidden
-  /* animation: blink 2s linear infinite; */
+  visibility: hidden;
+  color: red;
+  animation: blink 2s linear infinite;
 }
 
 @keyframes blink {
