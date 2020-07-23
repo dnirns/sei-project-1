@@ -27,6 +27,7 @@ function init() {
   const grid = document.querySelector('.game-grid')
   const startButton = document.querySelector('#start-button')
   const resetButton = document.querySelector('#reset-button')
+  const music = new Audio('./assets/audio/Feeble-Screams-from-Forests-unknown-8 bit.mp3')
   
 
 
@@ -76,6 +77,7 @@ function init() {
   }
   function startEnter(e) {
     if (e.keyCode === 13) {  
+      music.play()
       startButton.style.visibility = 'hidden' 
       createPlayer()
       createAllEnemies()
