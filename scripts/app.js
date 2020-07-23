@@ -62,9 +62,9 @@ function init() {
   resetButton.addEventListener('click', resetClick)
   startButton.addEventListener('click', startClick)
   //KEYS
-  document.addEventListener('keyup', startEnter)
+  // document.addEventListener('keyup', startEnter)
   document.addEventListener('keydown', movePlayer)
-  document.addEventListener('keyup', resetKey)
+  // document.addEventListener('keyup', resetKey)
   
   
   //* GAME FUNCTIONS //
@@ -78,29 +78,30 @@ function init() {
     createAllEnemies()
     moveEnemies()
   }
-  function startEnter(e) {
-    if (e.keyCode === 13) {  
-      startSfx.play()
-      music.play()
-      startButton.style.visibility = 'hidden' 
-      gameWrapper.style.visibility = 'visible'
-      createPlayer()
-      createAllEnemies()
-      moveEnemies()
-    }
-  }
+
+  // function startEnter(e) {
+  //   if (e.keyCode === 13) {  
+  //     startSfx.play()
+  //     music.play()
+  //     startButton.style.visibility = 'hidden' 
+  //     gameWrapper.style.visibility = 'visible'
+  //     createPlayer()
+  //     createAllEnemies()
+  //     moveEnemies()
+  //   }
+  // }
+
   //? RESET GAME - BUTTON AND KEYBOAD INPUT
   function resetClick() {
     startSfx.play()
     location.reload() 
   }
-  
-  function resetKey(e) {  
-    if (e.keyCode === 82) {
-      startSfx.play()
-      location.reload() 
-    }
-  }
+  // function resetKey(e) {  
+  //   if (e.keyCode === 82) {
+  //     startSfx.play()
+  //     location.reload() 
+  //   }
+  // }
 
 
   //* MOVEMENT //
@@ -165,9 +166,11 @@ function init() {
         cells[playerPosition].classList.add('explosion-no-loop') 
         playerPosition = null
         removeAllEnemies()  
+        gameOverLaugh.play()
+        music.pause()
+        music.currentTime = 0
         gameOverText.style.visibility = 'visible'   
-        resetButton.style.visibility = 'visible'
-        gameWrapper.style.visibility = 'hidden'
+        resetButton.style.visibility = 'visible' 
         resetButton.style.animation = 'blink 2s linear infinite'   
         clearInterval(enemyTimerId)
       }
@@ -188,7 +191,7 @@ function init() {
         clearInterval(enemyTimerId)
       }
 
-    }, 20)
+    }, 500)
   }
 
     
