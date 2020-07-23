@@ -14,6 +14,7 @@ body {
   background-color: black;
   background-image: url('https://media.giphy.com/media/eidlFWEMajNjzNEmqT/giphy.gif'); 
   background-size: cover;
+
   margin: 20px;
   text-align: center;
   display: flex;
@@ -24,7 +25,8 @@ body {
 }
 
 h1 {
-  font-size: 5em;
+  font-size: 3em;
+  text-shadow: 3px 4px #ff0000;
 }
 .wrapper {
   
@@ -42,14 +44,13 @@ h1 {
   font-size: 10px;
   color: white;
   padding: 15px;
-  background-color: rgba(82, 81, 81, 0.201);
-  border: 2px dashed rgba(255, 255, 255, 0.687);
+  background-color: rgba(255, 255, 255, 0.071);
+  border: 2px dashed rgba(255, 255, 255, 0.619);
   
   
 }
 
 .game-grid {
-  /* background-image: url('../assets/backgrounds/b9e3da6363497.560b11e9a84d8 (1).png'); */
   background-size: cover;
   display: flex;
   flex-wrap: wrap;
@@ -74,6 +75,8 @@ h1 {
   position: fixed;
   font-size: 2em;
   animation: blink 2s linear infinite;
+  color: red;
+  text-shadow: 2px 3px #ffffff;
 }
 
 .game-won {
@@ -82,6 +85,7 @@ h1 {
   margin: 5px 5px;
   position: fixed;
   font-size: 2em;
+  /* text-shadow: 4px 4px #ff0000; */
 }
 
 .player {
@@ -92,14 +96,10 @@ h1 {
   background-size: contain;
 }
 
-.enemy {
-  background-color: lawngreen;
-}
-
 .laser {    
   height: 40px;
   width: 40px;
-  background-image: url('../assets/sprites/Plasma_Large_png_processed.png');
+  background-image: url('../assets/sprites/Laser_Large_png_processed.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -163,12 +163,14 @@ h1 {
   position: fixed;
   font-size: 2.5em;
   color: rgb(249, 47, 47);  
+  text-shadow: 2px 2px white;
   animation: blink 2s linear infinite;
 }
 
 #reset-button {
   visibility: hidden;
   color: red;
+  text-shadow: 2px 2px white;
   animation: blink 2s linear infinite;
 }
 

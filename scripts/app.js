@@ -53,7 +53,7 @@ function init() {
   function removeAllEnemies() {
     enemyPositions.forEach(enemy => cells[enemy].classList.remove('ghost-shriek'))
   }
-  // CREATE ALL ENEMY ROWS COMBINED FUNCTION
+
   function createAllEnemies() {
     enemyPositions.forEach(enemy => cells[enemy].classList.add('ghost-shriek'))
   }
@@ -94,6 +94,7 @@ function init() {
     startSfx.play()
     location.reload() 
   }
+  
   function resetKey(e) {  
     if (e.keyCode === 82) {
       startSfx.play()
@@ -160,13 +161,13 @@ function init() {
       if (cells[bottomLeftGridIndex].classList.contains('ghost-shriek')) {
         clearInterval(enemyTimerId)
         removePlayer()
-        explosionAudio.play()
-        
+        explosionAudio.play()  
         cells[playerPosition].classList.add('explosion-no-loop') 
         playerPosition = null
         removeAllEnemies()  
         gameOverText.style.visibility = 'visible'   
         resetButton.style.visibility = 'visible'
+        gameWrapper.style.visibility = 'hidden'
         resetButton.style.animation = 'blink 2s linear infinite'   
         clearInterval(enemyTimerId)
       }
@@ -182,11 +183,12 @@ function init() {
         music.currentTime = 0
         gameOverText.style.visibility = 'visible'    
         resetButton.style.visibility = 'visible'
+        gameWrapper.style.visibility = 'hidden'
         resetButton.style.animation = 'blink 2s linear infinite'   
         clearInterval(enemyTimerId)
       }
 
-    }, 500)
+    }, 20)
   }
 
     
@@ -244,6 +246,7 @@ function init() {
         clearInterval(enemyTimerId)
         music.pause()
         music.currentTime = 0
+        gameWrapper.style.visibility = 'hidden'
         gameWonText.style.visibility = 'visible'    
         resetButton.style.visibility = 'visible'
       }     
