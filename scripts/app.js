@@ -124,9 +124,9 @@ function init() {
     }
     if (cells[playerPosition].classList.contains('ghost-shriek')) {
       clearInterval(enemyTimerId)
-      cells[playerPosition].classList.add('explosion-no-loop')
       removePlayer()
       removeAllEnemies()
+      cells[playerPosition].classList.add('explosion-no-loop')
       gameOverLaugh.play()
       gameOverExplosion.play()
       music.pause()
@@ -234,6 +234,7 @@ function init() {
     if (!isLaserShooting) {
       return
     }
+    
     isLaserShooting = false
     laserPosition = playerPosition
     const laserMovingUp = true
