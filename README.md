@@ -24,7 +24,7 @@ Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript 
 
 ### Deployed version:
 
-[sei-proj-1](https://dnirns.github.io/sei-project-1/)
+[Soul Invaders - Daniel Irons SEI Project 1](https://dnirns.github.io/sei-project-1/)
 
 ### Game start and primary gamplay:
 
