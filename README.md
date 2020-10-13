@@ -22,9 +22,7 @@ Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript 
 ## Extras:
 * Animating sprites as GIF’s with Adobe Photoshop.
 
-### Deployed version:
-
-[Soul Invaders - Daniel Irons SEI Project 1](https://dnirns.github.io/sei-project-1/)
+## Demo:
 
 ### Game start and primary gamplay:
 
@@ -40,4 +38,6 @@ Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript 
 ![demo3](./assets/gifs/space-invaders-3.gif)
 
 
+## Deployed version:
 
+[Soul Invaders - Daniel Irons SEI Project 1](https://dnirns.github.io/SEI-project-1/)
