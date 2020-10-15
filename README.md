@@ -2,7 +2,7 @@
 # General Assembly SEI Project 1
 # JavaScript ‘Space Invaders’ Game
 ## Overview
-Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript in one week. This was my first project, made 3 weeks into the Software Engineering Immersive course at General Assembly.
+Space Invaders based game *Soul Inhabitants*, created solo with vanilla JavaScript in one week. This was my first project, made 3 weeks into the Software Engineering Immersive course at General Assembly.
 
 ## Timeframe
 7 days, solo.
@@ -16,7 +16,7 @@ Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript 
 ## Technical Requirements
 * Render a game in the browser.
 * Design logic for winning & visually display that the player has won.
-* Use JavaScript for DOM manipulation
+* Use JavaScript for DOM manipulation.
 * KISS (Keep it Simple Stupid) and DRY (Don’t Repeat Yourself) principles.
 
 ## Extras:
@@ -24,12 +24,12 @@ Space Invaders based game *Soul Inhabitants*, made solo with vanilla JavaScript 
 
 ## Demo:
 
-### Game start and primary gamplay:
+### Game start and primary game-play:
 
 ![demo1](./assets/gifs/space-invaders-1.gif)
 
 
-### Game end - player loss:
+### Game end - player loses:
 
 ![demo2](./assets/gifs/space-invaders-2.gif)
 
