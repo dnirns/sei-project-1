@@ -39,6 +39,17 @@ A space Invaders based game *Soul Inhabitants*, created solo with only vanilla J
 * Left and right arrows to move your space ship.
 * Space bar to shoot.
 
+## Technical Process:
+
+* I made sure to plan the game as much as possible in advace and break it down into stages:
+	* Breaking down the game and the main elements that I would need to include.
+	* Coming up with a stylistic concept and wireframing a basic visual plan for the finished game.
+	* Writing pseudo-code for the logic to get the most essential parts of the game working.
+	* Starting to code the game, working from the most general elements and gradually filling in the more complex parts of the game until the main structure was intact and functioning properly.
+	* Moving on to adding styling with basic CSS.
+	* Fine tuning logic and handling of DOM elements.
+	* Allowing time towards the end to add more complex visual elements, including animating sprites with Photoshop and editing sound effects and music with Adobe Audition, then working these into the existing game to replace the more basic placeholder elements.
+
 
 ## Key Learnings:
 
