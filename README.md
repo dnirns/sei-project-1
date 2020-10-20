@@ -29,7 +29,7 @@ A space Invaders based game *Soul Inhabitants*, created solo with only vanilla J
 ## Technical Requirements:
 
 * Render a game in the browser.
-* Design logic for winning & visually display that the player has won.
+* Design logic for winning and visually display that the player has won.
 * Use JavaScript for DOM manipulation.
 * KISS (Keep it Simple Stupid) and DRY (Don’t Repeat Yourself) principles.
 
@@ -59,7 +59,7 @@ It opened up my eyes to the possibilities that are avaliable to you when you’r
 
 ## Challenges:
 
-After only 3 being three weeks into the course, this was initially a big challenge - there were a lot of brand new concepts to put into practice
+After only 3 being three weeks into the course, this was initially a big challenge - there were a lot of brand new concepts to put into practice.
 
 Once I had the basic grid layed out and the player responding to keyboard events, the most difficult part to get working correctly was the logic for the enemies movement across the grid. Specifically when they touched the edge of the grid and had to move down one layer closer to the player sprite.
 
@@ -83,7 +83,7 @@ It was hugely rewarding to get over the hurdles that I came across during the de
 ![demo1](./assets/gifs/space-invaders-1.gif)
 
 
-### Game end - player loes:
+### Game end - player loses:
 
 ![demo2](./assets/gifs/space-invaders-2.gif)
 
